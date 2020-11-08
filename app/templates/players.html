@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+
+<body>
+    <h1>PLAYERS</h1>
+
+    <p>
+        Search by name: 
+        <input type="text" />
+        <button>Search</button>
+    </p>
+
+    <ul>
+        {% for player in players %}
+        <li><a href='/player/{{player.kgs}}'>{{ player.name }}</a> ({{ player.level}})</li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

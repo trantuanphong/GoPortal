@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+
+<body>
+    <h1>PLAYER DETAIL</h1>
+    <p>Player name: {{ player.user.name }}</p>
+    <p>Games:</p>
+    <ul>
+        {% for game in player.games %}
+            {% if game.gameType == 'ranked' %}
+                <li>{{game.players.white.name}} ({{game.players.white.rank}}) vs {{game.players.black.name}} ({{game.players.black.rank}})</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
