@@ -4,13 +4,11 @@ from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gorankingportal.sqlite3'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///GoPortal.sqlite3'
 db = SQLAlchemy(app)
 
-db.Model.metadata.reflect(db.engine)
-db.metadata.clear()
-
-from .models import kifu
+from .models.club import Club
+from .models.player import Player
 db.create_all()
 
 from app import routes
