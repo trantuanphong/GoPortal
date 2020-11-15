@@ -1,12 +1,23 @@
-<!doctype html>
-<html>
+{% extends 'bootstrap/base.html' %}
 
-<body>
-    <h1>{{ club.name }}</h1>
+{% block title %}
+    {{ club.name }}
+{% endblock%}
 
-    <p>Address: {{ club.address }}</p>
-    <p>Contact: {{ club.contact }}</p>
+{% block content %}
+<div class="container">
+    <div class="row">
+        <h2> {{ club.name }} </h2>
+        <p> Province: {{ club.province }} </p>
+        <p> Address: {{ club.address}} </p>
+        <p> Contact: {{ club.contact}} </p>
+    </div>
 
-</body>
-
-</html>
+    <div class="row">
+        <h2> MEMBER </h2>
+        {% for member in club.members %}
+            <p>{{ member.name }} ({{ member.rank }})</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

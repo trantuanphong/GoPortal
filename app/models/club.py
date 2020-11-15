@@ -10,7 +10,7 @@ class Club(db.Model):
     lng = db.Column(db.Float, unique = False, nullable = False)
     lat = db.Column(db.Float, unique = False, nullable = False)
 
-    members = db.relationship('Player', lazy = 'select', backref=db.backref('person', lazy='joined'))
+    members = db.relationship('Player', lazy = 'select') #, backref=db.backref('members', lazy='joined'))
 
     def init(obj):
         club = Club()
@@ -26,16 +26,26 @@ class Club(db.Model):
         return club
 
     def insert(clubs):
+        print(len(clubs))
         for club in clubs:
             db.session.add(Club.init(club))
         db.session.commit()
     
-    def update(clubs):
-        for club in clubs:
-            Club.query.filter_by(id = club.get('id')).update(club)
+    def update(id, club):
+        Club.query.filter_by(id = club.get(id)).update(club)
         db.session.commit()
     
-    def delete(clubs):
-        for club in clubs:
-            Club.query.filter_by(id = club.get('id')).delete()
+    def delete(id):
+        Club.query.filter_by(id = id).delete()
         db.session.commit()
+
+    def getById(id):
+        return Club.query.filter_by(id = id).first()
+
+    def getAll():
+        return Club.query.all()
+
+    def dumpHTML(self):
+        info = '<strong><a href="/club/'+str(self.id)+'">'+ self.name +'</a></strong>'
+        info += '<p>Contact: '+ self.contact +'</p>'
+        return info
