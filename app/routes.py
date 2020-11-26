@@ -1,9 +1,10 @@
 from app import app, db
-from flask import render_template, request
+from flask import render_template, request, make_response
 from .connection import kgs_connecter as Kgs
 from .utils.map_util import MapboxUtil
 from .models.club import Club
 from .models.player import Player
+from .iefile.csv_rw import CSVHandler
 
 import json, urllib, ssl
 
@@ -18,6 +19,14 @@ def getClubs():
     clubs = Club.getAll()
     datasource = MapboxUtil.toGeoJSON(clubs)
     return render_template('clubs.html', clubs = clubs, datasource = datasource)
+
+@app.route("/clubs/download")
+def dowloadClubs():
+    clubs = Club.getAll()
+    output = make_response(CSVHandler.exportClub(clubs))
+    output.headers["Content-Disposition"] = "attachment; filename=export.csv"
+    output.headers["Content-type"] = "text/csv; charset=UTF-8"
+    return output
 
 @app.route("/clubs", methods = ["POST"])
 def addClubs():
@@ -58,6 +67,16 @@ def deleteClub(id):
 def getClub(id):
     club = Club.getById(id)
     return render_template('club.html', club = club)
+
+@app.route("/club/<id>/download")
+def downloadClubMember(id):
+    club = Club.getById(id)
+    members = club.members
+
+    output = make_response(CSVHandler.exportClubMember(members))
+    output.headers["Content-Disposition"] = "attachment; filename=export.csv"
+    output.headers["Content-type"] = "text/csv"
+    return output
 
 @app.route("/players", methods = ["GET"])
 def getPlayers():

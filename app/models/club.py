@@ -16,12 +16,12 @@ class Club(db.Model):
         club = Club()
         if 'id' in obj:
             club.id = obj.get('id')
-        club.name = obj.get('name', '')
-        club.province = obj.get('province', '')
-        club.address = obj.get('address', '')
-        club.contact = obj.get('contact', '')
-        club.lng = obj.get('lng', 0)
-        club.lat = obj.get('lat', 0)
+        club.name = obj.get('Name', '')
+        club.province = obj.get('Province', '')
+        club.address = obj.get('Address', '')
+        club.contact = obj.get('Contact', '')
+        club.lng = obj.get('Lng', 0)
+        club.lat = obj.get('Lat', 0)
 
         return club
 

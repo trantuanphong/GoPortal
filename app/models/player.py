@@ -15,7 +15,7 @@ class Player(db.Model):
         player.rank = obj.get('rank','?')
         player.hometown = obj.get('hometown')
         player.birthYear = obj.get('birthyear')
-        player.clubId = obj.get('clubid')
+        player.clubId = obj.get('clubId')
         return player
 
     def insert(players):

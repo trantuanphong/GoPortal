@@ -15,6 +15,7 @@
 
     <div class="row">
         <h2> MEMBER </h2>
+        <a href="/club/{{club.id}}/download">Download</a>
         {% for member in club.members %}
             <p>{{ member.name }} ({{ member.rank }})</p>
         {% endfor %}

@@ -11,17 +11,17 @@ class GSheetConnector:
     ctx.verify_mode = ssl.CERT_NONE
 
     def loadClub():
-        url = 'http://gsx2json.com/api?id=19dez-dGIocco9mUNAOaQ9fN7os9F8wRJyRVux7WEZ1g&sheet=1'
+        url = 'https://sheet2api.com/v1/3UU1EL2CRVKP/danh-sach-cac-clb/club'
         uh = urllib.request.urlopen(url, context = GSheetConnector.ctx)
         rawData = uh.read()
         jsonData = json.loads(rawData)
-        clubs = jsonData['rows']
+        clubs = jsonData
         Club.insert(clubs)
 
     def loadMember():
-        url = 'http://gsx2json.com/api?id=19dez-dGIocco9mUNAOaQ9fN7os9F8wRJyRVux7WEZ1g&sheet=2'
+        url = 'https://sheet2api.com/v1/3UU1EL2CRVKP/danh-sach-cac-clb/member'
         uh = urllib.request.urlopen(url, context = GSheetConnector.ctx)
         rawData = uh.read()
         jsonData = json.loads(rawData)
-        players = jsonData['rows']
+        players = jsonData
         Player.insert(players)
