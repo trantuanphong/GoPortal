@@ -99,15 +99,35 @@ def addPlayers():
     )
     return response
 
-@app.route("/players", methods = ["PUT"])
-def editPlayers():
-    return "123"
+@app.route("/player/<id>", methods = ["PUT"])
+def editPlayer(id):
+    data = request.get_json(force = True)
+    Player.update(id, data)
+    message = "Update successfully!"
+    response = app.response_class(
+        response=json.dumps(message),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
-@app.route("/players", methods = ["DELETE"])
-def deletePlayers():
-    return "123"
+@app.route("/player/<id>", methods = ["DELETE"])
+def deletePlayer(id):
+    Player.delete(id)
+    message = "Delete successfully!"
+    response = app.response_class(
+        response=json.dumps(message),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
+@app.route("/player")
 @app.route("/player/<id>")
-def getPlayer(id):
-    player = Kgs.getUserInfo(id)
-    return render_template('player.html', player = player)
+def getPlayer(id = None):
+    # player = Kgs.getUserInfo(id)
+    player = {}
+    if id is not None:
+        player = Player.getById(id)
+    clubs = Club.getAll()
+    return render_template('player.html', player = player, clubs = clubs)

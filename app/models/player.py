@@ -14,7 +14,7 @@ class Player(db.Model):
         player.name = obj.get('name')
         player.rank = obj.get('rank','?')
         player.hometown = obj.get('hometown')
-        player.birthYear = obj.get('birthyear')
+        player.birthYear = obj.get('birthYear')
         player.clubId = obj.get('clubId')
         return player
 
@@ -22,3 +22,14 @@ class Player(db.Model):
         for player in players:
             db.session.add(Player.init(player))
         db.session.commit()    
+
+    def update(id, player):
+        Player.query.filter_by(id = id).update(player)
+        db.session.commit()
+
+    def delete(id):
+        Player.query.filter_by(id = id).delete()
+        db.session.commit()
+
+    def getById(id):
+        return Player.query.filter_by(id = id).first()

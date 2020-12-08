@@ -3,10 +3,12 @@ class CSVHandler():
     def exportClub(clubs):
         content = 'Name|Province|Address\n'
         for club in clubs:
-            content += club.name + '|' 
-            content += club.province + '|' 
-            content += club.address + '\n' 
-            # content += club.contact + '\n'
+            row = ''
+            row += club.name + '|' 
+            row += club.province + '|' 
+            row += club.address + '|' 
+            row += club.contact.strip() + '\n'
+            content += CSVHandler.cleanString(row)
         return content
 
     def importClub(file):
@@ -24,3 +26,8 @@ class CSVHandler():
 
     def importClubMember(file):
         return "123"
+
+    def cleanString(content):
+        content = content.strip().replace('\n',' ')
+        content += '\n'
+        return content

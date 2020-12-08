@@ -1,17 +1,56 @@
-<!doctype html>
-<html>
+{% extends 'bootstrap/base.html' %}
 
-<body>
-    <h1>PLAYER DETAIL</h1>
-    <p>Player name: {{ player.user.name }}</p>
-    <p>Games:</p>
-    <ul>
-        {% for game in player.games %}
-            {% if game.gameType == 'ranked' %}
-                <li>{{game.players.white.name}} ({{game.players.white.rank}}) vs {{game.players.black.name}} ({{game.players.black.rank}})</li>
-            {% endif %}
-        {% endfor %}
-    </ul>
-</body>
+{% block title %}
+PLAYER
+{% endblock %}
 
-</html>
+{% block content %}
+<div class="container">
+    <h1>Player</h1>
+    <div class="row">
+        <div class="form-group">
+            <label for="playerId">Id</label>
+            <input type="text" class="form-control" value="{{player.id}}" id="playerId" disabled=true />
+        </div>
+        <div class="form-group">
+            <label for="playerName">Name</label>
+            <input type="text" class="form-control" value="{{player.name}}" id="playerName" />
+        </div>
+        <div class="form-group">
+            <label for="playerRank">Rank</label>
+            <input type="text" class="form-control" value="{{player.rank}}" id="playerRank" />
+        </div>
+        <div class="form-group">
+            <label for="playerHometown">Hometown</label>
+            <input type="text" class="form-control" value="{{player.hometown}}" id="playerHometown" />
+        </div>
+        <div class="form-group">
+            <label for="playerBirthYear">Birth Year</label>
+            <input type="number" class="form-control" value="{{player.birthYear}}" id="playerBirthYear" />
+        </div>
+        <div class="form-group">
+            <label for="playerBirthYear">Club:</label>
+            <select class="form-control" id="playerClub">
+                {% for club in clubs %}
+                    <option value="{{club.id}}" 
+                        {% if club.id == player.clubId %} selected {% endif %}> 
+                        {{club.name}} 
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" onclick="savePlayer()">Save</button>
+        </div>
+    </div>
+    <div id="notify" class="alert alert-success" style="visibility: hidden;">
+        <strong>Success!</strong>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{url_for('.static', filename='js/player.js')}}"></script>
+{{super()}}
+{% endblock %}

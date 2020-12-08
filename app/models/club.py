@@ -26,13 +26,12 @@ class Club(db.Model):
         return club
 
     def insert(clubs):
-        print(len(clubs))
         for club in clubs:
             db.session.add(Club.init(club))
         db.session.commit()
     
     def update(id, club):
-        Club.query.filter_by(id = club.get(id)).update(club)
+        Club.query.filter_by(id = id).update(club)
         db.session.commit()
     
     def delete(id):
