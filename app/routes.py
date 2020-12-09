@@ -63,9 +63,12 @@ def deleteClub(id):
     )
     return response
 
+@app.route("/club", methods = ["GET"])
 @app.route("/club/<id>", methods = ["GET"])
-def getClub(id):
-    club = Club.getById(id)
+def getClub(id = None):
+    club = Club()
+    if id is not None:
+        club = Club.getById(id)
     return render_template('club.html', club = club)
 
 @app.route("/club/<id>/download")

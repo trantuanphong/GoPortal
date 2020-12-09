@@ -1,4 +1,4 @@
-{% extends 'bootstrap/base.html' %}
+{% extends '_master.html' %}
 
 {% block title %}
 CLUBS
@@ -10,21 +10,35 @@ CLUBS
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="jumbotron">
-        <h1>The Vietnam Go Portal</h1> 
-      </div>
-    <div class="row">
-        <div class="col">
-            <div id="map" style="width: 100%; height: 700px;" datasource="{{datasource}}"></div>
+{{super()}}
+<div class="row">
+    <div class="col-sm-9">
+        <div id="map" style="width: 100%; height: 800px;" datasource="{{datasource}}"></div>
+    </div>
+    <div class="col-sm-3" style="margin-top: 50px;">
+        <div style="padding-right: 20px;">
+            <h2>Go Club List</h2>
+            <input class="form-control" id="myInput" type="text" placeholder="Search..">
+            <br>
+            <ul class="list-group" id="myList">
+                {% for club in clubs %}
+                <li class="list-group-item">
+                    <!-- <a href="/club/{{club.id}}"  -->
+                    <a onclick="flyToSymbol('{{club.lng}}','{{club.lat}}')"> 
+                        {{club.name}} 
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block scripts %}
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="{{url_for('.static', filename='js/map.js')}}"></script>
+<script src="{{url_for('.static', filename='js/clubs.js')}}"></script>
 {{super()}}
 {% endblock %}

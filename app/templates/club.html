@@ -1,37 +1,52 @@
-{% extends 'bootstrap/base.html' %}
+{% extends '_master.html' %}
 
 {% block title %}
 {{ club.name }}
 {% endblock%}
 
+{% block styles %}
+{{super()}}
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+{% endblock %}
+
 {% block content %}
-<div class="container">
+{{super()}}
+<div class="container" style="margin-top: 50px;">
     <div class="row">
         <h2> Club Detail </h2>
     </div>
 
     <div class="row">
-        <div style="float: right;">
-            <button class="btn btn-primary" onclick="updateClub('{{club.id}}')">Update</button>
-            <button class="btn btn-success" onclick="addClub()">Add new</button>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="clubName">Name</label>
+                <input type="text" class="form-control" value="{{club.name}}" id="clubName" />
+            </div>
+            <div class="form-group">
+                <label for="clubProvince">Province</label>
+                <input type="text" class="form-control" value="{{club.province}}" id="clubProvince" />
+            </div>
+            <div class="form-group">
+                <label for="clubAddress">Address</label>
+                <input type="text" class="form-control" value="{{club.address}}" id="clubAddress" />
+            </div>
+            <div class="form-group">
+                <label for="clubContact">Contact</label>
+                <textarea class="form-control" rows="3" id="clubContact">{{club.contact}}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="clubLat">Lng</label>
+                <input type="number" class="form-control" value="{{club.lng}}" id="clubLng" />
+                <label for="clubLat">Lat</label>
+                <input type="number" class="form-control" value="{{club.lat}}" id="clubLat" />
+            </div>
+            <div>
+                <button class="btn btn-primary" onclick="updateClub('{{club.id}}')">Update</button>
+                <button class="btn btn-success" onclick="addClub()">Add new</button>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="form-group">
-            <label for="clubName">Name</label>
-            <input type="text" class="form-control" value="{{club.name}}" id="clubName" />
-        </div>
-        <div class="form-group">
-            <label for="clubProvince">Province</label>
-            <input type="text" class="form-control" value="{{club.province}}" id="clubProvince" />
-        </div>
-        <div class="form-group">
-            <label for="clubAddress">Address</label>
-            <input type="text" class="form-control" value="{{club.address}}" id="clubAddress" />
-        </div>
-        <div class="form-group">
-            <label for="clubContact">Contact</label>
-            <textarea class="form-control" rows="3" id="clubContact">{{club.contact}}</textarea>
+        <div class="col-sm-6">
+            <div id="map" style="width: 100%; height: 500px;"></div>
         </div>
     </div>
 
@@ -78,7 +93,9 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="{{url_for('.static', filename='js/map.js')}}"></script>
 <script src="{{url_for('.static', filename='js/club.js')}}"></script>
 {{super()}}
 {% endblock %}

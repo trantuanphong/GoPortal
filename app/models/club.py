@@ -12,6 +12,10 @@ class Club(db.Model):
 
     members = db.relationship('Player', lazy = 'select') #, backref=db.backref('members', lazy='joined'))
 
+    def __init__(self):
+        self.lng = 105.6207275390417
+        self.lat = 21.281789604927425
+
     def init(obj):
         club = Club()
         if 'id' in obj:
@@ -20,8 +24,8 @@ class Club(db.Model):
         club.province = obj.get('Province', '')
         club.address = obj.get('Address', '')
         club.contact = obj.get('Contact', '')
-        club.lng = obj.get('Lng', 0)
-        club.lat = obj.get('Lat', 0)
+        club.lng = obj.get('Lng', 105.6207275390417)
+        club.lat = obj.get('Lat', 21.281789604927425)
 
         return club
 

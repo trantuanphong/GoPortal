@@ -43,4 +43,5 @@ function savePlayer() {
                 notify();
             })
     }
+    location.replace("/club/" + player.clubId);
 }

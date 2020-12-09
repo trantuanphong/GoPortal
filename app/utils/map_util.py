@@ -12,7 +12,8 @@ class MapboxUtil:
                     'coordinates': [club.lng, club.lat]
                 },
                 'properties': {
-                    'description': club.dumpHTML()
+                    'description': club.dumpHTML(),
+                    'title': club.name,
                 }
             }
             features.append(feature)
