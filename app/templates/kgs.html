@@ -1,0 +1,33 @@
+{% extends '_master.html' %}
+
+{% block content %}
+{{super()}}
+
+<div class="container" style="margin-top: 50px;">
+    <h2>{{player.name}} - {{player.kgs}}</h2>
+    <table class="table table-striped">
+        <tr>
+            <th>Game Type</th>
+            <th>Score</th>
+            <th>Komi</th>
+            <th>Handicap</th>
+            <th>White</th>
+            <th>Black</th>
+            <th>Time</th>
+        </tr>
+        {% for game in kgs.games %}
+        <tr>
+            <td> {{game.gameType}} </td>
+            <td> {{game.score}} </td>
+            <td> {{game.komi}} </td>
+            <td> {{game.handicap}} </td>
+            <td> {{game.players.white.name}} ({{game.players.white.rank}}) </td>
+            <td> {{game.players.black.name}} ({{game.players.black.rank}}) </td>
+            <td> {{game.timestamp}} </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock %}

@@ -1,9 +1,5 @@
 {% extends '_master.html' %}
 
-{% block title %}
-{{ club.name }}
-{% endblock%}
-
 {% block styles %}
 {{super()}}
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
@@ -65,6 +61,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Rank</th>
+                    <th>KGS</th>
                     <th>Hometown</th>
                     <th>DOB</th>
                     <th>Action</th>
@@ -74,6 +71,11 @@
                 <tr>
                     <td>{{ member.name }}</td>
                     <td>{{ member.rank }}</td>
+                    <td>
+                        <a href="/player/{{member.id}}/kgs">
+                            {{ member.kgs }}
+                        </a>
+                    </td>
                     <td>{{ member.hometown }}</td>
                     <td>{{ member.birthYear}}</td>
                     <td>

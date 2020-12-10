@@ -5,6 +5,7 @@ class Player(db.Model):
     name = db.Column(db.String(100), nullable = False)
     rank = db.Column(db.String(3), nullable = False)
     hometown = db.Column(db.String(20))
+    kgs = db.Column(db.String(20))
     birthYear = db.Column(db.Integer)
 
     clubId = db.Column(db.Integer, db.ForeignKey('club.id'), nullable = False)
@@ -15,6 +16,7 @@ class Player(db.Model):
         player.rank = obj.get('rank','?')
         player.hometown = obj.get('hometown')
         player.birthYear = obj.get('birthYear')
+        player.kgs = obj.get('kgs')
         player.clubId = obj.get('clubId')
         return player
 

@@ -134,3 +134,9 @@ def getPlayer(id = None):
         player = Player.getById(id)
     clubs = Club.getAll()
     return render_template('player.html', player = player, clubs = clubs)
+
+@app.route("/player/<id>/kgs")
+def getKgsInfo(id):
+    player = Player.getById(id)
+    kgs = Kgs.getUserInfo(player.kgs)
+    return render_template('kgs.html', kgs = kgs, player = player)
