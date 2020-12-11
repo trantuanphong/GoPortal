@@ -1,7 +1,3 @@
-function notify() {
-    document.getElementById('notify').style.visibility = "visible";
-}
-
 function getPlayerInfo() {
     var player = {};
     player.id = document.getElementById('playerId').value;
@@ -27,7 +23,7 @@ function savePlayer() {
         })
             .then((json) => {
                 console.log(json);
-                notify();
+                alert('Success');
             })
     } else {
         fetch('/player/' + player.id, {
@@ -40,7 +36,7 @@ function savePlayer() {
         })
             .then((json) => {
                 console.log(json);
-                notify();
+                alert('Success');
             })
     }
     location.replace("/club/" + player.clubId);

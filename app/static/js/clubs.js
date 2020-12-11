@@ -1,11 +1,20 @@
-$(document).ready(function(){
-    $("#myInput").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("#myList li").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
+// $(document).ready(function () {
+//     $("#myInput").on("keyup", function () {
+//         var value = $(this).val().toLowerCase();
+//         $("#myList li").filter(function () {
+//             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+//         });
+//     });
+// });
+
+$(document).ready(function () {
+    $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $(".panel").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
     });
-  });
+});
 
 map.on('load', function () {
     // Add an image to use as a custom marker
@@ -72,7 +81,7 @@ map.on('mouseleave', 'clubs', function () {
 
 function flyToSymbol(lng, lat) {
     map.flyTo({
-        center: [lng,lat],
+        center: [lng, lat],
         zoom: 14,
         essential: true,
     });
