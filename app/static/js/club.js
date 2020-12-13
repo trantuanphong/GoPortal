@@ -36,6 +36,20 @@ function getClubInfo() {
     club.contact = document.getElementById('clubContact').value.trim();
     club.lat = document.getElementById('clubLat').value.trim();
     club.lng = document.getElementById('clubLng').value.trim();
+    club.openDescription = document.getElementById('clubOpenDescription').value.trim();
+
+    var open = '1';
+    openWeekDays = document.getElementsByClassName('openWeekDay');
+    for (var i = 0; i < openWeekDays.length; i++) {
+        if (openWeekDays[i].checked) {
+            open += '1';
+        }
+        else {
+            open += '0';
+        }
+    }
+    club.openDay = open;
+
     return club;
 }
 
@@ -53,8 +67,8 @@ function updateClub(id) {
             body: JSON.stringify(club),
         })
             .then((json) => {
-                console.log(json);
-                alert('Success!')
+                //console.log(json);
+                alert('Success!');
                 //notify();
             })
     }
@@ -72,7 +86,8 @@ function addClub() {
         body: JSON.stringify(clubs),
     })
         .then((json) => {
-            console.log(json);
+            //console.log(json);
+            alert('Success!');
             //notify();
         })
 }

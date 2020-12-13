@@ -31,6 +31,26 @@
                 <textarea class="form-control" rows="3" id="clubContact">{{club.contact}}</textarea>
             </div>
             <div class="form-group">
+                <label for="clubOpenDescription">Open</label>
+                <div class="form-inline">
+                    <input type="checkbox" id="isOpenMonday" class="openWeekDay" {% if club.openDay[1] == '1' %} checked {% endif %} >
+                    <label for="isOpenMonday"> Monday </label>
+                    <input type="checkbox" id="isOpenTuesday" class="openWeekDay" {% if club.openDay[2] == '1' %} checked {% endif %}>
+                    <label for="isOpenTuesday"> Tuesday </label>
+                    <input type="checkbox" id="isOpenWednesday" class="openWeekDay" {% if club.openDay[3] == '1' %} checked {% endif %}>
+                    <label for="isOpenWednesday"> Wednesday </label>
+                    <input type="checkbox" id="isOpenThursday" class="openWeekDay" {% if club.openDay[4] == '1' %} checked {% endif %}>
+                    <label for="isOpenThursday"> Thursday </label>
+                    <input type="checkbox" id="isOpenFriday" class="openWeekDay" {% if club.openDay[5] == '1' %} checked {% endif %}>
+                    <label for="isOpenFriday"> Friday </label>
+                    <input type="checkbox" id="isOpenSaturday" class="openWeekDay" {% if club.openDay[6] == '1' %} checked {% endif %}>
+                    <label for="isOpenSaturday"> Saturday </label>
+                    <input type="checkbox" id="isOpenSunday" class="openWeekDay" {% if club.openDay[7] == '1' %} checked {% endif %}>
+                    <label for="isOpenSunday"> Sunday </label>
+                </div>
+                <textarea class="form-control" rows="3" id="clubOpenDescription">{{club.openDescription}}</textarea>
+            </div>
+            <div class="form-group">
                 <label for="clubLat">Lng</label>
                 <input type="number" class="form-control" value="{{club.lng}}" id="clubLng" />
                 <label for="clubLat">Lat</label>

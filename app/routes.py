@@ -17,6 +17,7 @@ ctx.verify_mode = ssl.CERT_NONE
 @app.route("/clubs", methods = ["GET"])
 def getClubs():
     clubs = Club.getAll()
+    clubs = Club.setOpen(clubs)
     datasource = MapboxUtil.toGeoJSON(clubs)
     return render_template('clubs.html', clubs = clubs, datasource = datasource)
 

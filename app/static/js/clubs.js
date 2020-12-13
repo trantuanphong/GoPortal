@@ -18,6 +18,7 @@ $(document).ready(function () {
 
 map.on('load', function () {
     // Add an image to use as a custom marker
+    map.addImage('pulsing-dot', pulsingDot, { pixelRatio: 2 });
 
     datasource = document.getElementById('map').getAttribute('datasource');
     datasource = JSON.parse(datasource);
@@ -35,7 +36,15 @@ map.on('load', function () {
                 'type': 'symbol',
                 'source': 'clubs',
                 'layout': {
-                    'icon-image': 'custom-marker',
+                    'icon-image': [
+                        'case',
+                        ['==', 
+                            ['get','isOpen'],
+                            true
+                        ],
+                        'pulsing-dot',
+                        'custom-marker'
+                    ],
                     // get the title name from the source's "title" property
                     'text-field': ['get', 'title'],
                     'text-font': [

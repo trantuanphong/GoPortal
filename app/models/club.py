@@ -1,4 +1,5 @@
 from app import db
+from datetime import datetime
 
 class Club(db.Model):
 
@@ -9,7 +10,8 @@ class Club(db.Model):
     contact = db.Column(db.String(120), unique = False, nullable = False)
     lng = db.Column(db.Float, unique = False, nullable = False)
     lat = db.Column(db.Float, unique = False, nullable = False)
-
+    openDescription = db.Column(db.String(500))
+    openDay = db.Column(db.String(10))
     members = db.relationship('Player', lazy = 'select') #, backref=db.backref('members', lazy='joined'))
 
     def __init__(self):
@@ -26,6 +28,8 @@ class Club(db.Model):
         club.contact = obj.get('Contact', '')
         club.lng = obj.get('Lng', 105.6207275390417)
         club.lat = obj.get('Lat', 21.281789604927425)
+        club.openDay = obj.get('OpenDay','11111111')
+        club.openDescription = obj.get('OpenDescription','')
 
         return club
 
@@ -52,3 +56,11 @@ class Club(db.Model):
         info = '<strong><a href="/club/'+str(self.id)+'">'+ self.name +'</a></strong>'
         info += '<p>Contact: '+ self.contact +'</p>'
         return info
+
+    def setOpen(clubs):
+        weekDay = datetime.today().weekday() + 1
+        for club in clubs:
+            club.isOpen = False
+            if club.openDay[weekDay] == '1':
+                club.isOpen = True
+        return clubs

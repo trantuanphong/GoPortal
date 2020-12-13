@@ -1,8 +1,10 @@
 import json
+from datetime import datetime
 
 class MapboxUtil:
 
     def toGeoJSON(clubs):
+        
         features = []
         for club in clubs:
             feature = {
@@ -14,6 +16,7 @@ class MapboxUtil:
                 'properties': {
                     'description': club.dumpHTML(),
                     'title': club.name,
+                    'isOpen': club.isOpen,
                 }
             }
             features.append(feature)

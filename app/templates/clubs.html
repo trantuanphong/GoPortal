@@ -3,6 +3,7 @@
 {% block styles %}
 {{super()}}
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 
 {% block content %}
@@ -28,12 +29,16 @@
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse_{{club.id}}"
                                 onclick="flyToSymbol('{{club.lng}}','{{club.lat}}')">
                                 {{club.name}}</a>
+                            {% if club.isOpen %}
+                            <i class="fa fa-circle" style="color:green"></i>
+                            {% endif %}
                         </h4>
                     </div>
                     <div id="collapse_{{club.id}}" class="panel-collapse collapse">
                         <div class="panel-body">
                             <p><b>Address:</b> {{club.address}}</p>
                             <p><b>Contact:</b> {{club.contact}}</p>
+                            <p><b>Open:</b> {{club.openDescription}}</p>
                             <p class="text-right">
                                 <a href="/club/{{club.id}}">More</a>
                             </p>
