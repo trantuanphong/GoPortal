@@ -2,8 +2,8 @@ import json, requests
 
 LOGIN_DATA = {
     "type": "LOGIN",
-    "name": "truongcam",
-    "password": "123456",
+    "name": "[username]",
+    "password": "[password]",
     "locale": "en_US"
 }
 

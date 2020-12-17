@@ -30,13 +30,13 @@ function deleteMember(id) {
 
 function getClubInfo() {
     var club = {};
-    club.name = document.getElementById('clubName').value.trim();
-    club.province = document.getElementById('clubProvince').value.trim();
-    club.address = document.getElementById('clubAddress').value.trim();
-    club.contact = document.getElementById('clubContact').value.trim();
-    club.lat = document.getElementById('clubLat').value.trim();
-    club.lng = document.getElementById('clubLng').value.trim();
-    club.openDescription = document.getElementById('clubOpenDescription').value.trim();
+    club.Name = document.getElementById('clubName').value.trim();
+    club.Province = document.getElementById('clubProvince').value.trim();
+    club.Address = document.getElementById('clubAddress').value.trim();
+    club.Contact = document.getElementById('clubContact').value.trim();
+    club.Lat = document.getElementById('clubLat').value.trim();
+    club.Lng = document.getElementById('clubLng').value.trim();
+    club.OpenDescription = document.getElementById('clubOpenDescription').value.trim();
 
     var open = '1';
     openWeekDays = document.getElementsByClassName('openWeekDay');
@@ -48,7 +48,7 @@ function getClubInfo() {
             open += '0';
         }
     }
-    club.openDay = open;
+    club.OpenDay = open;
 
     return club;
 }
@@ -77,7 +77,7 @@ function updateClub(id) {
 function addClub() {
     var club = getClubInfo()
     var clubs = [club];
-    fetch('/club', {
+    fetch('/clubs', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
